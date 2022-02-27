@@ -10,7 +10,7 @@ I denne oppgaven skal du følge en steg-for-steg -guide for å lage et enkelt Te
 
 Vi vil her først gi et fugleperspektiv av koden vi skal opprette; i guiden som er linket til nedenfor vil opprettelsen av disse klassene gjøres i mer detalj.
 
-Vi baserer modellen vår på design -prinsippet om [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller), hvor vi i størst mulig grad ønsker å skille fra hverandreop
+Vi baserer modellen vår på design -prinsippet om [model-view-controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller), hvor vi i størst mulig grad ønsker å skille fra hverandre
  - selve logikken og datastrukturene i modellen,
  - hvordan modellene *vises*, og
  - hvordan modellen *kontrolleres* av brukeren.

@@ -8,11 +8,8 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Testing the class Coordinate
- */
+
 public class CoordinateTest {
-    /* TODO: Uncomment these tests and make them pass by implementing Coordinate
 
     @Test
     void coordinateSanityTest() {
@@ -62,5 +59,5 @@ public class CoordinateTest {
         Coordinate d = new Coordinate(100, 100);
         assertTrue(c.hashCode() == d.hashCode());
     }
-    */
+   
 }

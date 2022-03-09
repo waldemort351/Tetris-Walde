@@ -8,11 +8,9 @@ import java.util.Objects;
 
 import org.junit.jupiter.api.Test;
 
-/**
- * Testing the class CoordinateItem
- */
+
 public class CoordinateItemTest {
-    /* TODO: Uncomment these tests and make them pass by implementing CoordinateItem and Coordinate
+    
 
     @Test
     void coordinateItemSanityTest() {
@@ -69,5 +67,5 @@ public class CoordinateItemTest {
         assertFalse(Objects.equals(coordinateItem, coordinateItem3));
         assertFalse(Objects.equals(coordinateItem2, coordinateItem3));
     }
-    */
+    
 }

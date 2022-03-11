@@ -3,15 +3,14 @@ package inf101v22.tetris.view;
 import javax.swing.JComponent;
 
 import inf101v22.grid.CoordinateItem;
-import inf101v22.tetris.model.Tetrisboard;
+import inf101v22.tetris.model.TetrisBoard;
 import inf101v22.tetris.model.Tile;
-import inf101v22.tetris.model.Tetrismodel;
+import inf101v22.tetris.model.TetrisModel;
 
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Dimension;
 // import java.awt.Font;
-
 
 public class TetrisView extends JComponent {
 
@@ -31,6 +30,7 @@ public class TetrisView extends JComponent {
         // overriding an existing method from an inherited class --
         // it might be doing something important.
         super.paint(canvas);
+        drawTetrisBoard(canvas, 0, 0, this.getWidth(), this.getHeight(), 3);
     }
 
 
@@ -48,7 +48,6 @@ public class TetrisView extends JComponent {
         int preferredWidth = (s+p) * this.item.numColumns() + p;
         int preferredHeight = (s+p) * this.item.numRows() + p;
         return new Dimension(preferredWidth, preferredHeight);
-        //return new Dimension(preferredWidth, preferredHeight);
     }
 
 
@@ -58,29 +57,32 @@ public class TetrisView extends JComponent {
         
     }
 
-     // kan muligens settes til private
-    void drawBoardWithRightBottomPadding(Graphics g, int boardX, int boardY, int width, int height, int padding, Iterable<CoordinateItem<Tile>> board) {
+    private void drawBoardWithRightBottomPadding(Graphics g, int boardX, int boardY, int width, int height, int padding, Iterable<CoordinateItem<Tile>> board) {
             
-        int row = this.item.numRows();
-        int col = this.item.numColumns();
+        int nrows = this.item.numRows();
+        int ncols = this.item.numColumns();
 
         for (CoordinateItem<Tile> tile : board) {
-            int x = boardX + col * width / col;
-            int y = boardY + row * height / row;
-            int nextX = boardX + (col+1) * width / col;
-            int nextY = boardY + (row+1) * height / row;
+            int col = tile.coordinate.col;
+            int row = tile.coordinate.row;
+            int x = boardX + col * width / ncols;
+            int y = boardY + row * height / nrows;
+            int nextX = boardX + (col+1) * width / ncols;
+            int nextY = boardY + (row+1) * height / nrows;
             int cellHeight = nextY - y;
             int cellWidth = nextX - x;
 
-            drawTileWithRightBottomPadding(g, x, y, cellHeight, cellWidth, padding, tile.item.color);
+            Color color = tile.item == null ? Color.BLACK : tile.item.color;
+
+            drawTileWithRightBottomPadding(g, x, y, cellWidth, cellHeight, padding, color);
         }
         
     }
 
     // Draws the tetrisboard.
-    public void drawTetrisBoard(Graphics g, int x, int y, int width, int height, int padding) {
+    private void drawTetrisBoard(Graphics g, int x, int y, int width, int height, int padding) {
         drawBoardWithRightBottomPadding(g, x, y, width, height, padding, item.tileCoordinates());
-        
+        drawBoardWithRightBottomPadding(g, x, y, width, height, padding, item.tilesInPiece());
     }
 
 }

@@ -10,7 +10,7 @@ public class Grid<E> implements IGrid<E> {
 
     protected int rows;
     protected int cols;
-    protected List<E> cells;
+    protected List<List<E>> cells;
 
     public Grid(int row, int col, E defaultValue) {
         if(row <= 0 || col <= 0) {
@@ -19,9 +19,13 @@ public class Grid<E> implements IGrid<E> {
 
         rows = row;
         cols = col;
-        this.cells = new ArrayList<>(cols * rows);
-        for(int i = 0; i < cols * rows; ++i) {
-            cells.add(defaultValue);
+        this.cells = new ArrayList<>(rows);
+        for(int i = 0; i < rows; i++) {
+            List<E> rowList = new ArrayList<>(cols);
+            for (int j = 0; j < cols; j++) {
+                rowList.add(defaultValue);
+            }
+            cells.add(rowList);
         }
     }
 
@@ -43,14 +47,14 @@ public class Grid<E> implements IGrid<E> {
     public void set(Coordinate coordinate, E value) {
         checkCoordinate(coordinate);
 
-        cells.set(coordinateToIndex(coordinate), value);
+        cells.get(coordinate.row).set(coordinate.col, value);
     }
 
     @Override
     public E get(Coordinate coordinate) {
         checkCoordinate(coordinate);
 
-        return cells.get(coordinateToIndex(coordinate));
+        return cells.get(coordinate.row).get(coordinate.col);
     }
 
     /**

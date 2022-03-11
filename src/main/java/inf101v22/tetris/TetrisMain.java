@@ -3,8 +3,8 @@ package inf101v22.tetris;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
-import inf101v22.tetris.model.Tetrisboard;
-import inf101v22.tetris.model.Tetrismodel;
+import inf101v22.tetris.model.TetrisBoard;
+import inf101v22.tetris.model.TetrisModel;
 // import inf101v22.tetris.view.SampleView;
 import inf101v22.tetris.view.TetrisView;
 import inf101v22.tetris.view.TetrisViewable;
@@ -15,8 +15,8 @@ public class TetrisMain {
     public static void main(String[] args) {
         // JComponent view = new SampleView();
 
-        Tetrisboard board = new Tetrisboard(15, 10);
-        TetrisViewable obj = new Tetrismodel(board);
+        TetrisBoard board = new TetrisBoard(15, 10);
+        TetrisViewable obj = new TetrisModel(board);
         JComponent view = new TetrisView(obj);
           
         // The JFrame is the "root" application window.

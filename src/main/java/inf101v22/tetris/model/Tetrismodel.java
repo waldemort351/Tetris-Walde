@@ -5,37 +5,61 @@ import java.util.List;
 
 import inf101v22.grid.Coordinate;
 import inf101v22.grid.CoordinateItem;
+import inf101v22.tetris.model.piece.PositionedPiece;
+import inf101v22.tetris.model.piece.PositionedPieceFactory;
 import inf101v22.tetris.view.TetrisViewable;
 
-public class Tetrismodel implements TetrisViewable  {
+public class TetrisModel implements TetrisViewable  {
 
-    Tetrisboard tetrisboard;
+    private TetrisBoard tetrisBoard;
+    private PositionedPiece fallingPiece;
+    private PositionedPieceFactory pieceFactory;
 
-    public Tetrismodel( Tetrisboard tetrisboard) {
+    public TetrisModel(TetrisBoard tetrisBoard) {
 
-        this.tetrisboard = tetrisboard;
+        this.tetrisBoard = tetrisBoard;
+        // notater til steg 3-------
+
+
+        // for testing purposes.
+        this.tetrisBoard.set(new Coordinate(0,0), new Tile(Color.BLUE, 't'));
+        this.tetrisBoard.set(new Coordinate(14,0), new Tile(Color.CYAN, 'c')); 
+
+
+        this.pieceFactory = new PositionedPieceFactory(10/2);
+        this.fallingPiece = pieceFactory.getNextPositionedPiece();
+
+
+
 
         // coloring of the corners of the board, will remove later...
-        this.tetrisboard.set(new Coordinate(0,0), new Tile (Color.GREEN, 'g'));
-        this.tetrisboard.set(new Coordinate(0,this.tetrisboard.getCols()-1), new Tile (Color.YELLOW, 'y'));
-        this.tetrisboard.set(new Coordinate(this.tetrisboard.getRows()-1, 0), new Tile (Color.RED, 'r'));
-        this.tetrisboard.set(new Coordinate(this.tetrisboard.getRows()-1, this.tetrisboard.getCols()-1), new Tile (Color.BLUE, 'b'));
+        this.tetrisBoard.set(new Coordinate(0,0), new Tile (Color.GREEN, 'g'));
+        this.tetrisBoard.set(new Coordinate(0,this.tetrisBoard.getCols()-1), new Tile (Color.YELLOW, 'y'));
+        this.tetrisBoard.set(new Coordinate(this.tetrisBoard.getRows()-1, 0), new Tile (Color.RED, 'r'));
+        this.tetrisBoard.set(new Coordinate(this.tetrisBoard.getRows()-1, this.tetrisBoard.getCols()-1), new Tile (Color.BLUE, 'b'));
+
+       // System.out.println(tetrisBoard.charArray2dToString(tetrisBoard.toCharArray2d()));
     }
 
     @Override // lag test
     public int numRows() {
-        return tetrisboard.getRows();
+        return tetrisBoard.getRows();
     }
 
     @Override // lag test
     public int numColumns() {
-        return tetrisboard.getCols();
+        return tetrisBoard.getCols();
     }
 
     @Override
     public Iterable<CoordinateItem<Tile>> tileCoordinates() {
-        return tetrisboard;
+        return tetrisBoard;
 
+    }
+
+    @Override
+    public Iterable<CoordinateItem<Tile>> tilesInPiece() {
+        return tetrisBoard;
     }
     
 }

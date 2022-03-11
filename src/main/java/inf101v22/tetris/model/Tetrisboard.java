@@ -10,14 +10,14 @@ import inf101v22.grid.Grid;
  */
 
 
-public class Tetrisboard extends Grid<Tile>  {
+public class TetrisBoard extends Grid<Tile>  {
 
-    public Tetrisboard(int row, int col, Tile defaultValue) {
+    public TetrisBoard(int row, int col, Tile defaultValue) {
         super(row, col, defaultValue);
         //TODO Auto-generated constructor stub
     }
 
-    public Tetrisboard(int row, int col) {
+    public TetrisBoard(int row, int col) {
         super(row,col);
     }
     

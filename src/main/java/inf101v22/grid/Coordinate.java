@@ -11,6 +11,8 @@ public class Coordinate {
         this.col = col;
     }
 
+    
+
 
     @Override
     public boolean equals(Object o) {

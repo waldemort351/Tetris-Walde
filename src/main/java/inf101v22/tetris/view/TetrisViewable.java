@@ -23,7 +23,11 @@ public interface TetrisViewable {
     Iterable<CoordinateItem<Tile>> tileCoordinates();
 
 
-    
+    /**
+     * 
+     * @return Iterable<CoordinateItem<Tile>> that 
+     * iterates over the tiles in the falling pieces.
+     */
     Iterable<CoordinateItem<Tile>> tilesInPiece();
 
 

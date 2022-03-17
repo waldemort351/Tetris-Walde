@@ -3,11 +3,14 @@ package inf101v22.tetris;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 
+import inf101v22.tetris.controller.TetrisController;
 import inf101v22.tetris.model.TetrisBoard;
 import inf101v22.tetris.model.TetrisModel;
+import inf101v22.tetris.model.Tile;
 // import inf101v22.tetris.view.SampleView;
 import inf101v22.tetris.view.TetrisView;
 import inf101v22.tetris.view.TetrisViewable;
+import java.awt.Color;
 
 public class TetrisMain {
     public static final String WINDOW_TITLE = "INF101 Tetris";
@@ -15,9 +18,10 @@ public class TetrisMain {
     public static void main(String[] args) {
         // JComponent view = new SampleView();
 
-        TetrisBoard board = new TetrisBoard(15, 10);
-        TetrisViewable obj = new TetrisModel(board);
-        JComponent view = new TetrisView(obj);
+        TetrisBoard board = new TetrisBoard(15, 10, new Tile(Color.BLACK, 'T'));
+        TetrisModel obj = new TetrisModel(board);
+        TetrisView view = new TetrisView(obj);
+        TetrisController controller = new TetrisController(obj, view);
           
         // The JFrame is the "root" application window.
         // We here set som properties of the main window, 

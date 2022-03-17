@@ -13,6 +13,14 @@ import java.awt.Dimension;
 // import java.awt.Font;
 
 public class TetrisView extends JComponent {
+    
+    { // This code (between curly braces) is executed when an object is
+        // created (before the call to the constructor, if one exists). 
+        
+        // The call to setFocusable enables the panel to receive events from
+        // the user, such as key-presses and mouse movements.
+        this.setFocusable(true);
+    }
 
     TetrisViewable item;
     int s = 20;

@@ -14,48 +14,48 @@ public class PieceShape {
     private boolean[][] shape;
 
     // T-tile
-    static final PieceShape T = new PieceShape(new Tile(Color.BLACK, 'T'), new boolean[][] {
+    static final PieceShape T = new PieceShape(new Tile(Color.PINK, 'T'), new boolean[][] {
         {  true,  true,  true },
         { false,  true, false }
     }
      );
     
      // S-tile
-    static final PieceShape S = new PieceShape(new Tile(Color.BLACK, 'S'), new boolean[][] {
+    static final PieceShape S = new PieceShape(new Tile(Color.RED, 'S'), new boolean[][] {
         { false,  true,  true },
         {  true,  true, false }
     }
     );
     
     // Z-tile
-    static final PieceShape Z = new PieceShape(new Tile(Color.BLACK, 'Z'), new boolean[][] {
+    static final PieceShape Z = new PieceShape(new Tile(Color.GREEN, 'Z'), new boolean[][] {
         {  true,  true, false },
         { false,  true,  true }
     }
     );
     
     // I-tile
-    static final PieceShape I = new PieceShape(new Tile(Color.BLACK, 'I'), new boolean[][] {
+    static final PieceShape I = new PieceShape(new Tile(Color.CYAN, 'I'), new boolean[][] {
         { true,  true,  true, true }
     }
     );
     
     // J-tile
-    static final PieceShape J = new PieceShape(new Tile(Color.BLACK, 'J'), new boolean[][] {
+    static final PieceShape J = new PieceShape(new Tile(Color.BLUE, 'J'), new boolean[][] {
         { true, false, false },
         { true, true,  true }
     }
     );
     
     // L-tile
-    static final PieceShape L = new PieceShape(new Tile(Color.BLACK, 'L'), new boolean[][] {
+    static final PieceShape L = new PieceShape(new Tile(Color.ORANGE, 'L'), new boolean[][] {
         { false, false,  true },
         {  true,  true,  true }
     }
     );
     
     // O-tile
-    static final PieceShape O = new PieceShape(new Tile(Color.BLACK, 'O'), new boolean[][] {
+    static final PieceShape O = new PieceShape(new Tile(Color.MAGENTA, 'O'), new boolean[][] {
         {  true,  true },
         {  true,  true }
     }

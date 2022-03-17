@@ -17,8 +17,6 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
     int col;
     PieceShape shape;
 
-    
-
 
 
    // This constructor is set to default on purpose.
@@ -28,6 +26,10 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
         this.shape = shape;
     }
 
+    /**
+     * Gets the width of the tile.
+     * @return The width.
+     */
     public int getWidth() {
         return shape.getWidth();
         
@@ -35,7 +37,7 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
     }
     /**
      * Gets the height of the tile.
-     * @return the height.
+     * @return The height.
      */
     public int getHeight() {
         return shape.getHeight();
@@ -44,7 +46,7 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
 
     /**
      * Gets the value of the tile.
-     * @return the tile.
+     * @return The tile.
      */
     public Tile getTile() {
         return shape.getTile();
@@ -55,13 +57,13 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
     @Override
     public Iterator<CoordinateItem<Tile>> iterator() {
         ArrayList<CoordinateItem<Tile>> aList = new ArrayList<>();
-        for (row = 0; row < shape.getHeight(); row++) {
-            for (col = 0; col < shape.getWidth(); col++) {
+        for (int row = 0; row < shape.getHeight(); row++) {
+            for (int col = 0; col < shape.getWidth(); col++) {
                 if (shape.getShape()[row][col]) {
-                    CoordinateItem<Tile> coordinateItem = new CoordinateItem<Tile>(new Coordinate(row,col), this.shape.getTile());
+                    CoordinateItem<Tile> coordinateItem = new CoordinateItem<Tile>(new Coordinate(this.row + row, this.col + col), this.shape.getTile());
                     aList.add(coordinateItem);
 
-                    // TODO check the line above. (ikke sikkert det er noe galt med den, kjør og se)
+                    System.out.println("column "+coordinateItem.coordinate.col);
                     
                 }
             }
@@ -69,4 +71,16 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
         return aList.iterator();
     }
     
+
+    /**
+     * PositionedPiece method that creates a copy of itself.
+     * @param deltaRow
+     * @param deltaCol
+     * @return A copy of PositionedPiece, 
+     * but adjusted according to it's parameters deltaRow and deltaCol.
+     */
+    public PositionedPiece copy(int deltaRow, int deltaCol) {
+        PositionedPiece copy = new PositionedPiece(this.row + deltaRow, this.col + deltaCol, shape);
+        return copy;
+    }
 }

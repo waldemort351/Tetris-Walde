@@ -15,14 +15,10 @@ public class PositionedPieceFactory {
     private int center; 
 
     ArrayList<PositionedPiece> myArray = new ArrayList<PositionedPiece>();
-    
 
-    // First constructor. 
-    public PositionedPieceFactory(int center) {
-        this.center = center;
 
-    }
-
+    // Empty constructor
+    public PositionedPieceFactory() {}
 
     // Second constructor, for testing purposes. 
     // Se steg 3 for hvordan testen lages.--------
@@ -51,8 +47,8 @@ public class PositionedPieceFactory {
         int randomNumber = random.nextInt(standardPieces.length);
         PieceShape shape = standardPieces[randomNumber];
 
-        // Opprette en ny PositionedPiece basert på fasongen
-        Coordinate coordinate = new Coordinate(0, this.center);
+        // Creates a new PositionedPiece based on it's shape.
+        Coordinate coordinate = new Coordinate(0, this.center- shape.getWidth()/2);
         PositionedPiece newPiece = new PositionedPiece(coordinate.row, coordinate.col, shape);
         return newPiece;
 

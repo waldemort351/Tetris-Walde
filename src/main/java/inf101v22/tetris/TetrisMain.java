@@ -9,7 +9,6 @@ import inf101v22.tetris.model.TetrisModel;
 import inf101v22.tetris.model.Tile;
 // import inf101v22.tetris.view.SampleView;
 import inf101v22.tetris.view.TetrisView;
-import inf101v22.tetris.view.TetrisViewable;
 import java.awt.Color;
 
 public class TetrisMain {
@@ -19,9 +18,9 @@ public class TetrisMain {
         // JComponent view = new SampleView();
 
         TetrisBoard board = new TetrisBoard(15, 10, new Tile(Color.BLACK, 'T'));
-        TetrisModel obj = new TetrisModel(board);
-        TetrisView view = new TetrisView(obj);
-        TetrisController controller = new TetrisController(obj, view);
+        TetrisModel model = new TetrisModel(board);
+        TetrisView view = new TetrisView(model);
+        TetrisController controller = new TetrisController(model, view);
           
         // The JFrame is the "root" application window.
         // We here set som properties of the main window, 

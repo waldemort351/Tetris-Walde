@@ -1,7 +1,6 @@
 package inf101v22.tetris.model;
 
 import java.awt.Color;
-import java.util.List;
 
 import inf101v22.grid.Coordinate;
 import inf101v22.grid.CoordinateItem;
@@ -95,6 +94,17 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
             }
         }
         return true;
+    }
+
+    // Error probably occurs here, need to create copy method
+    @Override
+    public boolean rotatePiece() {
+        PositionedPiece rotatedPiece = this.fallingPiece.positionedPieceCopy();
+        if (legalMove(rotatedPiece)) {
+            this.fallingPiece = rotatedPiece;
+            return true;
+        }
+        return false;
     }
 
 }

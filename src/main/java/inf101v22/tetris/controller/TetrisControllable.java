@@ -10,5 +10,9 @@ public interface TetrisControllable {
      */
     boolean moveFallingPiece(int deltaRow, int deltaCol);
     
-    
+    /**
+     * 
+     * @return The piece rotated 90 degrees clockwise.
+     */
+    boolean rotatePiece();
 }

@@ -104,4 +104,22 @@ public class PieceShape {
         return tileAppearance;
 
     }
+
+
+    /**
+     * 
+     * @Returns A copy of a pieceshape, but rotated.
+     */
+    public PieceShape PieceShapeCopy() { 
+    boolean[][] rotatedShape = new boolean[shape[0].length][shape.length]; 
+    for (int row = 0; row < shape.length; row++) {
+        for (int col = 0; col < shape[0].length; col++) {
+            rotatedShape[col][shape.length - 1 - row] = shape[row][col];
+        }
+    }
+    return new PieceShape(tileAppearance, rotatedShape);
+    
+    }
 }
+
+   

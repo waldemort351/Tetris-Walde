@@ -62,8 +62,6 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
                 if (shape.getShape()[row][col]) {
                     CoordinateItem<Tile> coordinateItem = new CoordinateItem<Tile>(new Coordinate(this.row + row, this.col + col), this.shape.getTile());
                     aList.add(coordinateItem);
-
-                    System.out.println("column "+coordinateItem.coordinate.col);
                     
                 }
             }
@@ -82,5 +80,16 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
     public PositionedPiece copy(int deltaRow, int deltaCol) {
         PositionedPiece copy = new PositionedPiece(this.row + deltaRow, this.col + deltaCol, shape);
         return copy;
+    }
+
+    /**
+     * A copy method.
+     * @return a new piece where the rotation is executed within the center
+     * of the PositionedPiece.
+     */
+    public PositionedPiece positionedPieceCopy() {
+        PieceShape newShape = shape.PieceShapeCopy();
+
+        return new PositionedPiece(row+(shape.getHeight()/2) - newShape.getHeight()/2 , col+(shape.getWidth()/2) - newShape.getWidth()/2, newShape);
     }
 }

@@ -1,19 +1,25 @@
 package inf101v22.tetris.controller;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import inf101v22.tetris.model.GameScreen;
 import inf101v22.tetris.view.TetrisView;
 
-public class TetrisController implements java.awt.event.KeyListener  {
+public class TetrisController implements java.awt.event.KeyListener, java.awt.event.ActionListener  {
     
     TetrisControllable model;
     TetrisView tetrisItem;
+    javax.swing.Timer timer;
 
     public TetrisController(TetrisControllable model, TetrisView tetrisItem) {
         this.model = model;
         this.tetrisItem = tetrisItem;
         this.tetrisItem.addKeyListener(this);
-        // tetrisView.addKeyListener(this); (ikke sikker på hva som mentes her)
+        
+        this.timer = new javax.swing.Timer(model.getMsPerClockTick(), this);
+        timer.start();
+
     }
 
     @Override
@@ -37,8 +43,7 @@ public class TetrisController implements java.awt.event.KeyListener  {
             model.rotatePiece(); // Up arrow was pressed
         }
         else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            model.moveFallingPiece(0,0);// Spacebar was pressed
-            // skal mest sannsynlig erstattes.
+            model.pieceDrop(); // Spacebar was pressed
         }
         tetrisItem.repaint();
         
@@ -50,4 +55,17 @@ public class TetrisController implements java.awt.event.KeyListener  {
         
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (GameScreen.ACTIVE_GAME != null) {
+            model.clockTick();
+            tetrisItem.repaint();
+            timer.getDelay();
+        }
+        
+    }
+
+    private void getDelay() {
+
+    }
 }

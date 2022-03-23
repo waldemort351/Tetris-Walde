@@ -3,8 +3,6 @@ package inf101v22.tetris.model;
 import inf101v22.grid.Coordinate;
 import inf101v22.grid.Grid;
 
-// dobbeltsjekk om konstruktøren skal holde på det siste parameteret
-
 /**
  * Objects of this class represents a board of tiles.
  */
@@ -56,6 +54,45 @@ public class TetrisBoard extends Grid<Tile>  {
         return toString;
     } 
         
+    private boolean elemExistsOnBoard(TetrisBoard value, int elem) {
+        if ()
+    }
+    
+    private void fillRow(TetrisBoard value, int elem) {
+        
+    }
+
+    private void copyElemToAnotherRow(int first, int copyToSecond) {
+
+    }
+
+
+
+    /**
+     * 
+     * @return The number of removed rows.
+     */
+    public int removeFullRows() {
+        int a = this.getRows() - 1;
+        int b = this.getRows() - 2;
+        int numOfRejectedRows = 0;
+
+
+        while (a > 0) {
+            while (elemExistsOnBoard(null, b)) {
+                numOfRejectedRows += 1;
+                b -= 1;    
+            }
+        } if (elemExistsOnBoard(null, b)) {
+            copyElemToAnotherRow(b,a);
+        } 
+        else {
+            fillRow(null, a);
+            a -= 1;
+            b -= 1;
+            }
+            return numOfRejectedRows;
+        } 
     }
 
 

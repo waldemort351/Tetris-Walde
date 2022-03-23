@@ -3,6 +3,7 @@ package inf101v22.tetris.view;
 import javax.swing.JComponent;
 
 import inf101v22.grid.CoordinateItem;
+import inf101v22.tetris.model.GameScreen;
 import inf101v22.tetris.model.TetrisBoard;
 import inf101v22.tetris.model.Tile;
 import inf101v22.tetris.model.TetrisModel;
@@ -39,8 +40,28 @@ public class TetrisView extends JComponent {
         // it might be doing something important.
         super.paint(canvas);
         drawTetrisBoard(canvas, 0, 0, this.getWidth(), this.getHeight(), 3);
+        if (item.getGameScreen() == GameScreen.GAME_OVER) {
+            drawGameOverScreen(canvas);
+        }
+        
     }
-
+    
+    /**
+     * Rather than drawing over the entire screen,
+     * the program draws a small box with "GAME OVER"
+     * over the centre of the board.
+     * @param canvas
+     *  */
+     
+    private void drawGameOverScreen(Graphics canvas) {
+        Color transparentRed = new Color(0xff, 0, 0, 0x80); // fourth argument is transparency - try out different values 0x00 - 0xff
+        canvas.setColor(transparentRed);
+        canvas.fillRect(this.getWidth()/2-100, this.getHeight()/2-50, 200, 100);
+        canvas.setColor(Color.BLACK);
+        GraphicHelperMethods.drawCenteredString(
+                canvas, "GAME OVER",
+                0, 0, this.getWidth() - 0, this.getHeight() - 0);
+    }
 
     @Override
     public Dimension getPreferredSize() {
@@ -94,5 +115,6 @@ public class TetrisView extends JComponent {
     }
 
 }
+
 
 

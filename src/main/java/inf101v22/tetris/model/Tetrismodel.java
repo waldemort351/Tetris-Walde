@@ -8,12 +8,17 @@ import inf101v22.tetris.controller.TetrisControllable;
 import inf101v22.tetris.model.piece.PositionedPiece;
 import inf101v22.tetris.model.piece.PositionedPieceFactory;
 import inf101v22.tetris.view.TetrisViewable;
+import java.lang.Math;
 
 public class TetrisModel implements TetrisViewable, TetrisControllable {
 
     private TetrisBoard tetrisBoard;
     private PositionedPiece fallingPiece;
     private PositionedPieceFactory pieceFactory;
+    private GameScreen screenCondition;
+
+    static final int msPER_CLOCK_TICK = 2000;
+    private int countPieces = 0;
 
     public TetrisModel(TetrisBoard tetrisBoard) {
 
@@ -30,6 +35,7 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
         pieceFactory.setCenterColumn(10/2);
         this.fallingPiece = pieceFactory.getNextPositionedPiece();
     
+        this.screenCondition = GameScreen.ACTIVE_GAME;
 
 
 
@@ -89,14 +95,14 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
      */
     private boolean legalMove(PositionedPiece validCandidate) {
         for (CoordinateItem<Tile> tile : validCandidate) {
-            if ((this.tetrisBoard.get(tile.coordinate).color != Color.BLACK) || (!this.tetrisBoard.coordinateIsOnGrid(tile.coordinate))) {
+            if ( (!this.tetrisBoard.coordinateIsOnGrid(tile.coordinate)) || (this.tetrisBoard.get(tile.coordinate).color != Color.BLACK)) {
                 return false;
             }
         }
         return true;
     }
 
-    // Error probably occurs here, need to create copy method
+  
     @Override
     public boolean rotatePiece() {
         PositionedPiece rotatedPiece = this.fallingPiece.positionedPieceCopy();
@@ -105,6 +111,53 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void pieceDrop() {
+        while (moveFallingPiece(1,0)){
+
+        }
+        gluePiece();
+        getFallingPiece();
+    }   
+
+    
+    private void getFallingPiece() {
+        PositionedPiece nextCandidate = pieceFactory.getNextPositionedPiece();
+        if (legalMove(nextCandidate)) {
+            this.fallingPiece = nextCandidate;
+
+        } else { 
+            this.screenCondition = GameScreen.GAME_OVER;
+
+        }
+        this.countPieces += 1;
+
+    }
+
+    private void gluePiece() {
+        for (CoordinateItem<Tile> tile : fallingPiece ) {
+            tetrisBoard.set(tile.coordinate, tile.item);
+        }
+    }
+
+    @Override
+    public GameScreen getGameScreen() {
+        return screenCondition;
+    }
+
+    @Override // dobbeltsjekk returtypen her----------- steg 8
+    public int getMsPerClockTick() {
+        return (int) Math.pow(msPER_CLOCK_TICK*0.98, countPieces);
+    }
+
+    @Override
+    public void clockTick() {
+        while (moveFallingPiece(1,0)){
+
+        }
+        gluePiece();
     }
 
 }

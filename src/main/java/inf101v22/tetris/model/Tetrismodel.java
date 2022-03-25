@@ -18,12 +18,25 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
     static final int msPER_CLOCK_TICK = 2000;
     private int countPieces = 0;
 
+
+    // This constructor is for testing purposes only.
+    public TetrisModel(TetrisBoard board, PositionedPieceFactory piece ) {
+
+        this.tetrisBoard = board;
+
+        this.pieceFactory = piece;
+        pieceFactory.setCenterColumn(board.getCols()/2);
+        this.fallingPiece = pieceFactory.getNextPositionedPiece();
+    
+        this.screenCondition = GameScreen.ACTIVE_GAME;
+    }
+
     public TetrisModel(TetrisBoard tetrisBoard) {
 
         this.tetrisBoard = tetrisBoard;
 
         this.pieceFactory = new PositionedPieceFactory();
-        pieceFactory.setCenterColumn(10/2);
+        pieceFactory.setCenterColumn(tetrisBoard.getCols()/2);
         this.fallingPiece = pieceFactory.getNextPositionedPiece();
     
         this.screenCondition = GameScreen.ACTIVE_GAME;
@@ -107,11 +120,11 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
         }
         gluePiece();
         tetrisBoard.removeFullRows();
-        getFallingPiece();
+        nextFallingPiece();
     }   
 
     
-    private void getFallingPiece() {
+    private void nextFallingPiece() {
         PositionedPiece nextCandidate = pieceFactory.getNextPositionedPiece();
         if (legalMove(nextCandidate)) {
             this.fallingPiece = nextCandidate;
@@ -123,6 +136,17 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
         this.countPieces += 1;
 
     }
+
+
+    /**
+     * 
+     * @return A copy of the falling piece.
+     */
+    public PositionedPiece getFallingPiece() {
+        return fallingPiece.copy(0, 0);
+    }
+
+
 
     private void gluePiece() {
         for (CoordinateItem<Tile> tile : fallingPiece ) {
@@ -150,9 +174,23 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
         else {
         gluePiece();
         tetrisBoard.removeFullRows();
-        getFallingPiece();
+        nextFallingPiece();
         }
         
+    }
+
+    public String toString() {
+        return tetrisBoard.charArray2dToString(this.toCharArray2d());
+    }
+    
+    public char[][] toCharArray2d() {
+        char[][] twodDimChar = tetrisBoard.toCharArray2d();
+        for (CoordinateItem<Tile> tile : fallingPiece) {
+            int row = tile.coordinate.row;
+            int col = tile.coordinate.col;
+            twodDimChar[row][col] = tile.item.character;
+        }
+        return twodDimChar;
     }
 
 }

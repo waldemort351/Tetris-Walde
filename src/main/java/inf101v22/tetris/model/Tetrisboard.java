@@ -51,7 +51,7 @@ public class TetrisBoard extends Grid<Tile>  {
             for (int j = 0; j < cols; j++) {
                 toString += twoDimArray[i][j];
             } 
-            toString += "\n";
+            toString += System.lineSeparator();
         } 
         return toString;
     } 

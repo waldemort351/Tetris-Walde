@@ -14,7 +14,7 @@ public class PositionedPieceFactory {
     private Random random = new Random();
     private int center; 
 
-    ArrayList<PositionedPiece> myArray = new ArrayList<PositionedPiece>();
+    ArrayList<PieceShape> myArray = new ArrayList<PieceShape>();
 
 
     // Empty constructor
@@ -22,19 +22,13 @@ public class PositionedPieceFactory {
 
     // Second constructor, for testing purposes. 
     // Se steg 3 for hvordan testen lages.--------
-    PositionedPieceFactory(ArrayList<PositionedPiece> myArray) {
+    PositionedPieceFactory(ArrayList<PieceShape> myArray) {
         this.myArray = myArray;
     }
-
-
-
-
 
     public void setCenterColumn(int col) {
         this.center = col;
     }
-
-
 
     /**
      * Picks a random PieceShape object and 
@@ -42,10 +36,16 @@ public class PositionedPieceFactory {
      * @return A new PositionedPiece object.
      */
     public PositionedPiece getNextPositionedPiece() {
-
-        PieceShape[] standardPieces = PieceShape.STANDARD_TETRIS_PIECES;
-        int randomNumber = random.nextInt(standardPieces.length);
-        PieceShape shape = standardPieces[randomNumber];
+        PieceShape shape; 
+        if (myArray.size() == 0) {
+            PieceShape[] standardPieces = PieceShape.STANDARD_TETRIS_PIECES;
+            int randomNumber = random.nextInt(standardPieces.length);
+            shape = standardPieces[randomNumber];
+        } else {
+            shape = this.myArray.get(0);
+            this.myArray.remove(0);
+        }
+       
 
         // Creates a new PositionedPiece based on it's shape.
         Coordinate coordinate = new Coordinate(0, this.center- shape.getWidth()/2);

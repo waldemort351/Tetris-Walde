@@ -110,7 +110,7 @@ public class PieceShape {
      * 
      * @Returns A copy of a pieceshape, but rotated.
      */
-    public PieceShape PieceShapeCopy() { 
+    public PieceShape rotatedPieceShapeCopy() { 
     boolean[][] rotatedShape = new boolean[shape[0].length][shape.length]; 
     for (int row = 0; row < shape.length; row++) {
         for (int col = 0; col < shape[0].length; col++) {

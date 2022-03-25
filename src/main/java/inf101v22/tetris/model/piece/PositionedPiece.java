@@ -9,8 +9,6 @@ import inf101v22.tetris.model.Tile;
 
 // Objects in this class represents a tile with it's corresponding position.
 
-// Lag tester som beskrevet i steg 3. ------------------
-
 public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
 
     int row;
@@ -88,7 +86,7 @@ public class PositionedPiece implements Iterable<CoordinateItem<Tile>> {
      * of the PositionedPiece.
      */
     public PositionedPiece positionedPieceCopy() {
-        PieceShape newShape = shape.PieceShapeCopy();
+        PieceShape newShape = shape.rotatedPieceShapeCopy();
 
         return new PositionedPiece(row+(shape.getHeight()/2) - newShape.getHeight()/2 , col+(shape.getWidth()/2) - newShape.getWidth()/2, newShape);
     }

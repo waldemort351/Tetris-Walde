@@ -1,5 +1,7 @@
 package inf101v22.tetris.model;
 
+import java.util.Objects;
+
 import inf101v22.grid.Coordinate;
 import inf101v22.grid.Grid;
 
@@ -57,8 +59,7 @@ public class TetrisBoard extends Grid<Tile>  {
     private boolean elemExistsOnBoard(int row, Tile elem) {
         for (int i = 0; i < getCols(); i++) {
             Coordinate coordinate = new Coordinate(row, i);
-            System.out.println(coordinate.row);
-            if (get(coordinate) == elem) {
+            if (Objects.equals(get(coordinate), elem)) {
                 return true;
             }
         } return false;
@@ -89,7 +90,7 @@ public class TetrisBoard extends Grid<Tile>  {
      */
     public int removeFullRows() {
         int a = this.getRows() - 1;
-        int b = this.getRows() - 2;
+        int b = this.getRows() - 1;
         int numOfRejectedRows = 0;
 
 
@@ -103,10 +104,10 @@ public class TetrisBoard extends Grid<Tile>  {
         } 
         else {
             fillRow(a, null);
+            } 
             a -= 1;
             b -= 1;
-            }
-        }
+        } 
             return numOfRejectedRows;
         } 
     }

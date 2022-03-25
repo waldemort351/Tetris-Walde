@@ -4,9 +4,8 @@ import javax.swing.JComponent;
 
 import inf101v22.grid.CoordinateItem;
 import inf101v22.tetris.model.GameScreen;
-import inf101v22.tetris.model.TetrisBoard;
 import inf101v22.tetris.model.Tile;
-import inf101v22.tetris.model.TetrisModel;
+
 
 import java.awt.Graphics;
 import java.awt.Color;

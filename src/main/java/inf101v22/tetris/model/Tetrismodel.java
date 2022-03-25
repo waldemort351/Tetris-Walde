@@ -1,8 +1,6 @@
 package inf101v22.tetris.model;
 
 import java.awt.Color;
-
-import inf101v22.grid.Coordinate;
 import inf101v22.grid.CoordinateItem;
 import inf101v22.tetris.controller.TetrisControllable;
 import inf101v22.tetris.model.piece.PositionedPiece;
@@ -23,31 +21,12 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
     public TetrisModel(TetrisBoard tetrisBoard) {
 
         this.tetrisBoard = tetrisBoard;
-        // notater til steg 3-------
-
-
-        // for testing purposes.
-        this.tetrisBoard.set(new Coordinate(0,0), new Tile(Color.BLUE, 't'));
-        this.tetrisBoard.set(new Coordinate(14,0), new Tile(Color.CYAN, 'c')); 
-
 
         this.pieceFactory = new PositionedPieceFactory();
         pieceFactory.setCenterColumn(10/2);
-        tetrisBoard.removeFullRows();
         this.fallingPiece = pieceFactory.getNextPositionedPiece();
     
         this.screenCondition = GameScreen.ACTIVE_GAME;
-
-
-
-
-        // coloring of the corners of the board, will remove later...
-        this.tetrisBoard.set(new Coordinate(0,0), new Tile (Color.GREEN, 'g'));
-        this.tetrisBoard.set(new Coordinate(0,this.tetrisBoard.getCols()-1), new Tile (Color.YELLOW, 'y'));
-        this.tetrisBoard.set(new Coordinate(this.tetrisBoard.getRows()-1, 0), new Tile (Color.RED, 'r'));
-        this.tetrisBoard.set(new Coordinate(this.tetrisBoard.getRows()-1, this.tetrisBoard.getCols()-1), new Tile (Color.BLUE, 'b'));
-
-       // System.out.println(tetrisBoard.charArray2dToString(tetrisBoard.toCharArray2d()));
     }
 
     @Override // lag test
@@ -96,7 +75,14 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
      */
     private boolean legalMove(PositionedPiece validCandidate) {
         for (CoordinateItem<Tile> tile : validCandidate) {
-            if ( (!this.tetrisBoard.coordinateIsOnGrid(tile.coordinate)) || (this.tetrisBoard.get(tile.coordinate).color != Color.BLACK)) {
+            if ( (!this.tetrisBoard.coordinateIsOnGrid(tile.coordinate))) {
+                return false;
+            }
+            Tile getTileCoordinate = this.tetrisBoard.get(tile.coordinate);
+            if (getTileCoordinate == null) {
+                continue;
+            }
+            else if (!getTileCoordinate.color.equals(Color.BLACK)) {
                 return false;
             }
         }
@@ -120,6 +106,7 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
 
         }
         gluePiece();
+        tetrisBoard.removeFullRows();
         getFallingPiece();
     }   
 
@@ -133,7 +120,7 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
             this.screenCondition = GameScreen.GAME_OVER;
 
         }
-        // this.countPieces += 1;
+        this.countPieces += 1;
 
     }
 
@@ -152,18 +139,20 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
 
 
     
-    // @Override // dobbeltsjekk returtypen her----------- steg 8
-    // public int getMsPerClockTick() {
-    //     return (int) Math.pow(msPER_CLOCK_TICK*0.98, countPieces);
-    // }
+    @Override 
+    public int getMsPerClockTick() {
+        return (int) (msPER_CLOCK_TICK* Math.pow(0.98, countPieces));
+    }
 
-    // @Override
-    // public void clockTick() {
-    //     if (moveFallingPiece(1,0)){}
-    //     else {
-    //         gluePiece();
-    //     }
+    @Override
+    public void clockTick() {
+        if (moveFallingPiece(1,0)){}
+        else {
+        gluePiece();
+        tetrisBoard.removeFullRows();
+        getFallingPiece();
+        }
         
-    // }
+    }
 
 }

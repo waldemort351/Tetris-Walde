@@ -19,7 +19,7 @@ public interface TetrisControllable {
     boolean rotatePiece();
 
     /**
-     * Drops the piece
+     * Drops the piece.
      */
     void pieceDrop();
 
@@ -35,12 +35,12 @@ public interface TetrisControllable {
      * 
      * @return How many milliseconds that passes for every clocktick.
      */
-    // int getMsPerClockTick();
+    int getMsPerClockTick();
 
     /**
      * A method getting called for every tick.
      * The method either moves the piece down one row, or 
      * glues the piece to the board.
      */
-    // void clockTick();
+    void clockTick();
 }

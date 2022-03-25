@@ -1,15 +1,11 @@
 package inf101v22.tetris;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 import inf101v22.tetris.controller.TetrisController;
 import inf101v22.tetris.model.TetrisBoard;
 import inf101v22.tetris.model.TetrisModel;
-import inf101v22.tetris.model.Tile;
-// import inf101v22.tetris.view.SampleView;
 import inf101v22.tetris.view.TetrisView;
-import java.awt.Color;
 
 public class TetrisMain {
     public static final String WINDOW_TITLE = "INF101 Tetris";
@@ -17,7 +13,7 @@ public class TetrisMain {
     public static void main(String[] args) {
         // JComponent view = new SampleView();
 
-        TetrisBoard board = new TetrisBoard(15, 10, new Tile(Color.BLACK, 'T'));
+        TetrisBoard board = new TetrisBoard(15, 10, null);
         TetrisModel model = new TetrisModel(board);
         TetrisView view = new TetrisView(model);
         TetrisController controller = new TetrisController(model, view);

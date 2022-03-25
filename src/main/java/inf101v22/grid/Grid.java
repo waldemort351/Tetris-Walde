@@ -70,9 +70,9 @@ public class Grid<E> implements IGrid<E> {
     /**
      * This method computes which index in the list belongs to a given Coordinate
      */
-    private int coordinateToIndex(Coordinate coordinate) {
-        return coordinate.row + coordinate.col * rows;
-    }
+    // private int coordinateToIndex(Coordinate coordinate) {
+    //     return coordinate.row + coordinate.col * rows;
+    // }
 
     @Override
     public boolean coordinateIsOnGrid(Coordinate coordinate) {

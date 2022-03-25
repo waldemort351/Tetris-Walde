@@ -33,6 +33,7 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
 
         this.pieceFactory = new PositionedPieceFactory();
         pieceFactory.setCenterColumn(10/2);
+        tetrisBoard.removeFullRows();
         this.fallingPiece = pieceFactory.getNextPositionedPiece();
     
         this.screenCondition = GameScreen.ACTIVE_GAME;
@@ -132,7 +133,7 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
             this.screenCondition = GameScreen.GAME_OVER;
 
         }
-        this.countPieces += 1;
+        // this.countPieces += 1;
 
     }
 
@@ -147,17 +148,22 @@ public class TetrisModel implements TetrisViewable, TetrisControllable {
         return screenCondition;
     }
 
-    @Override // dobbeltsjekk returtypen her----------- steg 8
-    public int getMsPerClockTick() {
-        return (int) Math.pow(msPER_CLOCK_TICK*0.98, countPieces);
-    }
 
-    @Override
-    public void clockTick() {
-        while (moveFallingPiece(1,0)){
 
-        }
-        gluePiece();
-    }
+
+    
+    // @Override // dobbeltsjekk returtypen her----------- steg 8
+    // public int getMsPerClockTick() {
+    //     return (int) Math.pow(msPER_CLOCK_TICK*0.98, countPieces);
+    // }
+
+    // @Override
+    // public void clockTick() {
+    //     if (moveFallingPiece(1,0)){}
+    //     else {
+    //         gluePiece();
+    //     }
+        
+    // }
 
 }

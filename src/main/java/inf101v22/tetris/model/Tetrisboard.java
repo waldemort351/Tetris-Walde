@@ -54,16 +54,31 @@ public class TetrisBoard extends Grid<Tile>  {
         return toString;
     } 
         
-    private boolean elemExistsOnBoard(TetrisBoard value, int elem) {
-        if ()
-    }
-    
-    private void fillRow(TetrisBoard value, int elem) {
+    private boolean elemExistsOnBoard(int row, Tile elem) {
+        for (int i = 0; i < getCols(); i++) {
+            Coordinate coordinate = new Coordinate(row, i);
+            System.out.println(coordinate.row);
+            if (get(coordinate) == elem) {
+                return true;
+            }
+        } return false;
         
-    }
+    }   
+    
+    private void fillRow(int row, Tile elem) {
+        for (int i = 0; i < getCols(); i++) {
+            Coordinate coordinate = new Coordinate(row, i);
+            set(coordinate, elem);
+        }   
+    }   
+    
 
     private void copyElemToAnotherRow(int first, int copyToSecond) {
-
+        for (int i = 0; i < getCols(); i++) {
+            Coordinate firCoordinate = new Coordinate(first, i);
+            Coordinate secCoordinate = new Coordinate(copyToSecond, i);
+            set(secCoordinate, get(firCoordinate));
+        }
     }
 
 
@@ -79,18 +94,19 @@ public class TetrisBoard extends Grid<Tile>  {
 
 
         while (a > 0) {
-            while (elemExistsOnBoard(null, b)) {
+            while (b >= 0 && !elemExistsOnBoard(b, null)) {
                 numOfRejectedRows += 1;
                 b -= 1;    
             }
-        } if (elemExistsOnBoard(null, b)) {
+         if (b > 0 && b < getRows()) { 
             copyElemToAnotherRow(b,a);
         } 
         else {
-            fillRow(null, a);
+            fillRow(a, null);
             a -= 1;
             b -= 1;
             }
+        }
             return numOfRejectedRows;
         } 
     }

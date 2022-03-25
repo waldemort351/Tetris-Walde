@@ -17,8 +17,8 @@ public class TetrisController implements java.awt.event.KeyListener, java.awt.ev
         this.tetrisItem = tetrisItem;
         this.tetrisItem.addKeyListener(this);
         
-        this.timer = new javax.swing.Timer(model.getMsPerClockTick(), this);
-        timer.start();
+        // this.timer = new javax.swing.Timer(model.getMsPerClockTick(), this);
+        // timer.start();
 
     }
 
@@ -55,17 +55,17 @@ public class TetrisController implements java.awt.event.KeyListener, java.awt.ev
         
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (GameScreen.ACTIVE_GAME != null) {
-            model.clockTick();
-            tetrisItem.repaint();
-            timer.getDelay();
-        }
+    // @Override
+    // public void actionPerformed(ActionEvent e) {
+    //     if (GameScreen.ACTIVE_GAME != null) {
+    //         model.clockTick();
+    //         tetrisItem.repaint();
+    //         timer.getDelay();
+    //     }
         
-    }
+    // }
 
-    private void getDelay() {
+    // private void getDelay() {
 
-    }
+    //}
 }
